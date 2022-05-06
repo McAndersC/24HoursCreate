@@ -6,7 +6,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "start-server": "node index"
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
