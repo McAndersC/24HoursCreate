@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/css/preview/index.css" rel="stylesheet">
+    <link href="/css/index.css" rel="stylesheet">
+    <script src="/js/index.js" type="module" defer></script>
+    <title>24HoursViborg Front Office :: Moment Create System</title>
+</head>
+<body>
+    
+    <header class="header">
+        <img src="/assets/mcdm/icon-mcdm.svg" alt="24HoursViborg Front Office :: Moment Create System" width="50">
+        <h1 class="heading">Opret "et øjeblik".</h1>
+    </header>
+  
+    <section class="section section-description">
+        <p class="p">Først opretter vi stamdata. Når vi trykker "Opret et øjeblik" vil der blive oprettet en mappe hvor vi kan placere fotografens billeder i den tilhørende assets folder.</p>
+        <p class="p">Nu kan vi tilføje de nødvendige templates. Skulle der ske en fejl refresh og start forfra.</p>  
+    </section>
+
+    <section>
+        <form id="form-moment">
+            <label for="moment">Basis data</label>
+            <textarea id="moment">
+{
+    "title": "En god titel",
+    "time": "18:30",
+    "date": "2022-05-04",
+    "square": "01-rep.jpg",
+    "description": "En god beskrivelse 💪",
+    "author": "En forfatter "
+}
+            </textarea>
+            <button type="submit">Opret "ét øjeblik"</button>
+        </form>
+    </section>
+    
+    <section>
+        <form id="form-moment-templates" class="hide">
+   
+            <label for="momentTmpl" class="momentLabel">Tilføj minimum én template.</label>
+            <textarea class="tmpl" id="momentTmpl">
+{
+    "template": "01",
+    "media": [
+        {
+            "image": "02-rep.jpg",
+            "text": "[BILLEDE_TEKST]"
+        },
+        {
+            "image": "03-rep.jpg",
+            "text": "[BILLEDE_TEKST]"
+        }
+    ]
+}
+            </textarea>
+            <button type="submit">Tilføj</button> <button type="button" class="done hide">Afslut</button>
+        </form>
+    </section>
+
+    <section class="section section-preview hide">
+        <h2 class="heading">Preview</h2>
+        <p class="p">Tilføj flere templates hvis du ønsker det.</p>
+        <p class="p">Husk at undersøge at alle billeder og tekster vises som forventet. Man kan sagtens eksperimentere og starte forfra.</p>
+        <hr />
+        <div class="moment-container"></div>
+    </section>
+
+  
+</body>
+</html>
