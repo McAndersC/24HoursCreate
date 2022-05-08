@@ -8,23 +8,25 @@
     <link href="/assets/mcdm/mcdm_ico.png" rel="icon">
     <link href="/css/preview/index.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
-    <script src="/js/index.js" type="module" defer></script>
+    <script src="/js/bundle.js" type="module" defer></script>
     <title>24HoursViborg Front Office :: Moment Create System</title>
 </head>
 <body>
     <div class="page-wrapper">
         <main class="content">
             <header class="header">
-                <img src="/assets/mcdm/icon-mcdm.svg" alt="24HoursViborg Front Office :: Moment Create System" width="50">
+                <img src="/assets/mcdm/icon-mcdm.svg" class="logo" alt="24HoursViborg Front Office :: Moment Create System" width="50">
                 <h1 class="heading">Opret "et øjeblik".</h1>
             </header>
   
             <section class="section section-description">
-                <p class="p">Først opretter vi stamdata. Når vi trykker "Opret et øjeblik" vil der blive oprettet en mappe hvor vi kan placere fotografens billeder i den tilhørende assets folder.</p>
-                <p class="p">Nu kan vi tilføje de nødvendige templates. Skulle der ske en fejl refresh og start forfra.</p>  
+                <p class="p">1. Først opretter vi stamdata. Når vi trykker <b>"Opret et øjeblik"</b> vil der blive oprettet en mappe, hvori vi kan placere fotografens billeder, i den tilhørende <b>assets</b> mappe.</p>
+                <p class="p">2. Herefter kan vi tilføje de nødvendige templates. Se projektets readme.md for at se de forskellige template objekter.</p>  
             </section>
 
-            <section>
+      
+
+            <section class="form-section">
                 <form id="form-moment">
                     <label for="moment">Basis data</label>
                     <textarea id="moment">  
@@ -41,7 +43,7 @@
                 </form>
             </section>
     
-            <section>
+            <section class="form-section">
                 <form id="form-moment-templates" class="hide">
                     <label for="momentTmpl" class="momentLabel">Tilføj minimum én template.</label>
                     <textarea class="tmpl" id="momentTmpl">

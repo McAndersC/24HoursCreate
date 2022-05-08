@@ -55,12 +55,6 @@ moments.renderMoment = (moment) => {
 
 /* 
 
-    Form EventListners
-
-*/
-
-/* 
-
     Basic Data Form.
 
 */
@@ -129,17 +123,31 @@ momentFormTmpl.addEventListener('submit', (e) => {
     })
     .then((response) => response.json()).then( (response) => {
 
-        // console.log('Response', response);
+        console.log('Response', response);
 
         let momentLabel = document.querySelector('.momentLabel');
         let report = document.querySelector('.report');
         let preview = document.querySelector('.section-preview');
+        let description = document.querySelector('.section-description');
+        let finalize = document.querySelector('.section-finalize');
         momentLabel.textContent = `Super! - Du har oprettet ${response.templates.length} ${response.templates.length === 1 ? 'template' : 'templates'}`
 
         // momentFormTmpl.classList.add('hide');
         done.classList.remove('hide');
         preview.classList.remove('hide');
 
+        done.addEventListener('click', () => {
+
+
+            let formSections = document.querySelectorAll('.form-section');
+            formSections.forEach(sec => sec.classList.add('hide')) 
+            preview.classList.add('hide');
+           
+            description.innerHTML = '';
+            description.insertAdjacentHTML('beforeend', `<p class="p">Nu har du en færdig moment mappe <b>(${response.id})</b> placeret i din ".data/moments/" mappe. (<b>.data/moments/${response.id}</b>)</p>`)
+            // description.insertAdjacentHTML('beforeend', `<p class="p">Denne mappe kan du teste på det lokale site. Denne mappe skal afleveres til en moderator.</p>`)
+            
+        })
        
         moments.renderMoment(response);
     } );

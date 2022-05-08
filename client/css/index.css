@@ -13,11 +13,13 @@
 * {
     box-sizing: border-box;
 }
+
 :root {
 
     --font-family : "Rubik", sans-serif;
 
 }
+
 html {
     margin : 0;
     padding : 0;
@@ -29,8 +31,10 @@ body {
     font-size: 16px;
     font-family: var(--font-family);
     margin : 0;
-    
-    padding : 40px;
+    padding : 0;
+    height : 100%;
+    width: 100%;
+    padding: 40px;
 }
 
 .p {
@@ -58,6 +62,9 @@ body {
 
 
 */
+section {
+    width: 79vw;
+}
 
 .header {
     display: flex;
@@ -73,6 +80,10 @@ body {
 .heading {
     color : #6667a8;
     margin : 10px 0;
+}
+
+.logo {
+    width: 50px;
 }
 
 /*
