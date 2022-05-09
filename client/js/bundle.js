@@ -96,9 +96,6 @@
         return true;
     };
 
-
-
-
     moments.renderMoment = (moment) => {
 
         let momentContainer = document.querySelector('.moment-container');
