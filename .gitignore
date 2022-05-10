@@ -1,5 +1,5 @@
 .vscode
 
 /node_modules/
-/.data/moments/*
+/data/moments/*
 /client/js/bundle.js
