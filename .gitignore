@@ -2,4 +2,5 @@
 
 /node_modules/
 /data/moments/*
+!/data/moments/empty.txt
 /client/js/bundle.js
