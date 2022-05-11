@@ -8,46 +8,31 @@
     templates.template01 = (moment, template) => { 
 
         return `
-        <section class="threexfour fadeInUp">
-            <div class="container-75">
-                <div class="row">
-                    <div class="col1">
-                        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" /> <!-- Variabler som skal tages ud fra Jason -->
-                        <p class="pic-text"><span class="square"></span>${template.media[0].text}</p>
-                    </div>
-                    <div class="col2" style="width: 1.6vw;">
-                    </div>
-                    ${template.media.length === 1 ? '' : `
-                        <div class="col3">
-                        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[1].image}" />
-                        <p class="pic-text"><span class="square"></span>${template.media[1].text}</p>
-                    </div>`}
-                    
-                </div>
-            </div>
-        </section>
+    <section class="template1">
+        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp1-pic1" alt="">
+        <div class="text-pic1">${template.media[0].text}</div>
+        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[1].image}" class="temp1-pic2" alt="">
+        <div class="text-pic2">${template.media[1].text}</div>
+    </section>
     `
     };
 
     templates.template02 = (moment, template) => {
         // console.log(moment)
         return `
-    <section class="fourxthree">
-        <div class="container-75" style="margin: auto;">
-            <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" />
-            <p class="pic-text"><span class="square"></span>${template.media[0].text}</p>
-        </div>
+    <section class="template2">
+        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp2-pic1" alt="">
+        <div class="text-pic1">${template.media[0].text}</div>
     </section>
     `
     };
 
+
     templates.template03 = (moment, template) => {
         return `
-    <section class="onexone">
-        <div class="container-75">
-        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" /> 
-            <p class="pic-text"><span class="square"></span>${template.media[0].text}</p>
-        </div>
+    <section class="template3">
+        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp3-pic1" alt="">
+        <div class="text-pic1">${template.media[0].text}</div>
     </section>
     `
     };
@@ -136,11 +121,17 @@
     */
     momentForm.addEventListener('submit', (e) => {
 
+        console.log('Submitting');
         e.preventDefault();
 
-        let bodyData = e.currentTarget.elements.moment.value;
+        let bodyData = e.currentTarget.elements.moment.value.trim();
+        bodyData = bodyData.replace(/\r?\n|\r/g, "");
         let validJson = moments.isJsonString(bodyData);
-        console.log(moments.isJsonString(bodyData));
+
+
+        console.log('body-data', bodyData);
+        console.log('d', moments.isJsonString(bodyData));
+
 
         if(!validJson) {
 
@@ -160,6 +151,7 @@
             })
             .then((response) => response.json()).then( (response) => {
         
+                console.log('Response', response);
                 momentForm.classList.add('hide');
                 momentFormTmpl.classList.remove('hide');
         

@@ -60,11 +60,17 @@ moments.renderMoment = (moment) => {
 */
 momentForm.addEventListener('submit', (e) => {
 
+    console.log('Submitting');
     e.preventDefault();
 
-    let bodyData = e.currentTarget.elements.moment.value;
+    let bodyData = e.currentTarget.elements.moment.value.trim();
+    bodyData = bodyData.replace(/\r?\n|\r/g, "")
     let validJson = moments.isJsonString(bodyData);
-    console.log(moments.isJsonString(bodyData));
+
+
+    console.log('body-data', bodyData);
+    console.log('d', moments.isJsonString(bodyData));
+
 
     if(!validJson) {
 
@@ -84,6 +90,7 @@ momentForm.addEventListener('submit', (e) => {
         })
         .then((response) => response.json()).then( (response) => {
     
+            console.log('Response', response)
             momentForm.classList.add('hide');
             momentFormTmpl.classList.remove('hide');
     
