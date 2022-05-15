@@ -1,44 +1,39 @@
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':1338/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function () {
-    'use strict';
+   'use strict';
 
-    const templates = {};
+   const templates = {};
 
-    templates.template01 = (moment, template) => { 
+   templates.template01 = (moment, template) => { 
 
-        return `
-    <section class="template1">
-        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp1-pic1" alt="">
-        <div class="text-pic1">${template.media[0].text}</div>
-        <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[1].image}" class="temp1-pic2" alt="">
-        <div class="text-pic2">${template.media[1].text}</div>
-    </section>
+       return `
+   ipconfig
     `
-    };
+   };
 
-    templates.template02 = (moment, template) => {
-        // console.log(moment)
-        return `
+   templates.template02 = (moment, template) => {
+       // console.log(moment)
+       return `
     <section class="template2">
         <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp2-pic1" alt="">
         <div class="text-pic1">${template.media[0].text}</div>
     </section>
     `
-    };
+   };
 
 
-    templates.template03 = (moment, template) => {
-        return `
+   templates.template03 = (moment, template) => {
+       return `
     <section class="template3">
         <img src="/moments/${moment.id}/assets/${moment.id}/${template.media[0].image}" class="temp3-pic1" alt="">
         <div class="text-pic1">${template.media[0].text}</div>
     </section>
     `
-    };
+   };
 
-    templates.subpageHeaderTemplate = (moment) => 
-        `
+   templates.subpageHeaderTemplate = (moment) => 
+       `
         <section class="hero">
             <div class="container-75">
                 <div class="row">
@@ -61,174 +56,174 @@
         </section>
     `;
 
-    const done = document.querySelector('.done');
-    const momentForm = document.querySelector('#form-moment');
-    const momentFormTmpl = document.querySelector('#form-moment-templates');
+   const done = document.querySelector('.done');
+   const momentForm = document.querySelector('#form-moment');
+   const momentFormTmpl = document.querySelector('#form-moment-templates');
 
-    /* 
+   /* 
 
-        Preview Moments
+       Preview Moments
 
-    */
-    const moments = {};
+   */
+   const moments = {};
 
-    moments.isJsonString = (str) => {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-    };
+   moments.isJsonString = (str) => {
+       try {
+           JSON.parse(str);
+       } catch (e) {
+           return false;
+       }
+       return true;
+   };
 
-    moments.renderMoment = (moment) => {
+   moments.renderMoment = (moment) => {
 
-        let momentContainer = document.querySelector('.moment-container');
+       let momentContainer = document.querySelector('.moment-container');
 
-        momentContainer.innerHTML = '';
-        momentContainer.insertAdjacentHTML('beforeend', templates.subpageHeaderTemplate(moment));
+       momentContainer.innerHTML = '';
+       momentContainer.insertAdjacentHTML('beforeend', templates.subpageHeaderTemplate(moment));
 
-        moment.templates.forEach((template, index) => {
-     
-            switch (template.template) {
-        
-                case '01':
-     
-                    momentContainer.insertAdjacentHTML('beforeend', templates.template01(moment, template));
+       moment.templates.forEach((template, index) => {
+    
+           switch (template.template) {
+       
+               case '01':
+    
+                   momentContainer.insertAdjacentHTML('beforeend', templates.template01(moment, template));
 
-                    break;
+                   break;
 
-                case '02':
+               case '02':
 
-                    momentContainer.insertAdjacentHTML('beforeend', templates.template02(moment, template));
+                   momentContainer.insertAdjacentHTML('beforeend', templates.template02(moment, template));
 
-                    break;
+                   break;
 
-                case '03':
+               case '03':
 
-                    momentContainer.insertAdjacentHTML('beforeend', templates.template03(moment, template));
+                   momentContainer.insertAdjacentHTML('beforeend', templates.template03(moment, template));
 
-                    break;
-            }
-        });
+                   break;
+           }
+       });
 
-    };
+   };
 
-    /* 
+   /* 
 
-        Basic Data Form.
+       Basic Data Form.
 
-    */
-    momentForm.addEventListener('submit', (e) => {
+   */
+   momentForm.addEventListener('submit', (e) => {
 
-        console.log('Submitting');
-        e.preventDefault();
+       console.log('Submitting');
+       e.preventDefault();
 
-        let bodyData = e.currentTarget.elements.moment.value.trim();
-        bodyData = bodyData.replace(/\r?\n|\r/g, "");
-        let validJson = moments.isJsonString(bodyData);
-
-
-        console.log('body-data', bodyData);
-        console.log('d', moments.isJsonString(bodyData));
+       let bodyData = e.currentTarget.elements.moment.value.trim();
+       bodyData = bodyData.replace(/\r?\n|\r/g, "");
+       let validJson = moments.isJsonString(bodyData);
 
 
-        if(!validJson) {
-
-            alert('Invalid Json');
-
-        }
-
-        if(validJson) {
-            fetch('/moment/create',  
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' 
-                },
-                body: bodyData
-        
-            })
-            .then((response) => response.json()).then( (response) => {
-        
-                console.log('Response', response);
-                momentForm.classList.add('hide');
-                momentFormTmpl.classList.remove('hide');
-        
-                momentFormTmpl.dataset.moment = response.id;
-        
-            });
-        }
+       console.log('body-data', bodyData);
+       console.log('d', moments.isJsonString(bodyData));
 
 
-    });
+       if(!validJson) {
 
-    /* 
+           alert('Invalid Json');
 
-        Template Data Form.
+       }
 
-    */
-    momentFormTmpl.addEventListener('submit', (e) => {
-
-        e.preventDefault();
-        
-        let bodyData = e.currentTarget.elements.momentTmpl.value;
-        let id = e.currentTarget.dataset.moment;
-
-        let response = {
-            "id" : id,
-            "payload": bodyData
-        };
-
-        fetch('/templates',  
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' 
-            },
-            body: JSON.stringify(response)
-
-        })
-        .then((response) => response.json()).then( (response) => {
-
-            console.log('Response', response);
-
-            let momentLabel = document.querySelector('.momentLabel');
-            document.querySelector('.report');
-            let preview = document.querySelector('.section-preview');
-            let description = document.querySelector('.section-description');
-            document.querySelector('.section-finalize');
-            momentLabel.textContent = `Super! - Du har oprettet ${response.templates.length} ${response.templates.length === 1 ? 'template' : 'templates'}`;
-
-            // momentFormTmpl.classList.add('hide');
-            done.classList.remove('hide');
-            preview.classList.remove('hide');
-
-            done.addEventListener('click', () => {
+       if(validJson) {
+           fetch('/moment/create',  
+           {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json' 
+               },
+               body: bodyData
+       
+           })
+           .then((response) => response.json()).then( (response) => {
+       
+               console.log('Response', response);
+               momentForm.classList.add('hide');
+               momentFormTmpl.classList.remove('hide');
+       
+               momentFormTmpl.dataset.moment = response.id;
+       
+           });
+       }
 
 
-                let formSections = document.querySelectorAll('.form-section');
-                formSections.forEach(sec => sec.classList.add('hide')); 
-                preview.classList.add('hide');
+   });
+
+   /* 
+
+       Template Data Form.
+
+   */
+   momentFormTmpl.addEventListener('submit', (e) => {
+
+       e.preventDefault();
+       
+       let bodyData = e.currentTarget.elements.momentTmpl.value;
+       let id = e.currentTarget.dataset.moment;
+
+       let response = {
+           "id" : id,
+           "payload": bodyData
+       };
+
+       fetch('/templates',  
+       {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json' 
+           },
+           body: JSON.stringify(response)
+
+       })
+       .then((response) => response.json()).then( (response) => {
+
+           console.log('Response', response);
+
+           let momentLabel = document.querySelector('.momentLabel');
+           document.querySelector('.report');
+           let preview = document.querySelector('.section-preview');
+           let description = document.querySelector('.section-description');
+           document.querySelector('.section-finalize');
+           momentLabel.textContent = `Super! - Du har oprettet ${response.templates.length} ${response.templates.length === 1 ? 'template' : 'templates'}`;
+
+           // momentFormTmpl.classList.add('hide');
+           done.classList.remove('hide');
+           preview.classList.remove('hide');
+
+           done.addEventListener('click', () => {
+
+
+               let formSections = document.querySelectorAll('.form-section');
+               formSections.forEach(sec => sec.classList.add('hide')); 
+               preview.classList.add('hide');
+              
+               description.innerHTML = '';
+               description.insertAdjacentHTML('beforeend', `<p class="p">Nu har du en færdig moment mappe <b>(${response.id})</b> placeret i din ".data/moments/" mappe. (<b>.data/moments/${response.id}</b>)</p>`);
+               // description.insertAdjacentHTML('beforeend', `<p class="p">Denne mappe kan du teste på det lokale site. Denne mappe skal afleveres til en moderator.</p>`)
                
-                description.innerHTML = '';
-                description.insertAdjacentHTML('beforeend', `<p class="p">Nu har du en færdig moment mappe <b>(${response.id})</b> placeret i din ".data/moments/" mappe. (<b>.data/moments/${response.id}</b>)</p>`);
-                // description.insertAdjacentHTML('beforeend', `<p class="p">Denne mappe kan du teste på det lokale site. Denne mappe skal afleveres til en moderator.</p>`)
-                
-            });
-           
-            moments.renderMoment(response);
-        } );
+           });
+          
+           moments.renderMoment(response);
+       } );
 
-    });
+   });
 
 
-    done.addEventListener('click', () => {
+   done.addEventListener('click', () => {
 
 
-        console.log('Done');
+       console.log('Done');
 
 
-    });
+   });
 
 })();
