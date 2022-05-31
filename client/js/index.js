@@ -68,10 +68,6 @@ momentForm.addEventListener('submit', (e) => {
     let validJson = moments.isJsonString(bodyData);
 
 
-    console.log('body-data', bodyData);
-    console.log('d', moments.isJsonString(bodyData));
-
-
     if(!validJson) {
 
         alert('Invalid Json')
