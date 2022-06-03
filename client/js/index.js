@@ -59,8 +59,7 @@ moments.renderMoment = (moment) => {
 
 */
 momentForm.addEventListener('submit', (e) => {
-
-    console.log('Submitting');
+    
     e.preventDefault();
 
     let bodyData = e.currentTarget.elements.moment.value.trim();
